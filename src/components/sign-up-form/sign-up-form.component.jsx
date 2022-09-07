@@ -28,7 +28,7 @@ const SignUpForm = () => {
             const { user } = await createUserAuthWithEmaiAndPassword(email, password)
             await createUserDocumentFromAuth(user, { displayName })
             resetFormFields()
-            console.log("A:L OKK")
+
         }
         catch (e) {
             console.error(e)
@@ -41,9 +41,8 @@ const SignUpForm = () => {
     }
 
     const resetFormFields = () => {
-        console.log("Reseting valuessssss")
         setFormFields(defaultFormFields)
-        console.log("Resetting donene")
+  
     }
 
     return (
