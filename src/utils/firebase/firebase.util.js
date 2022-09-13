@@ -42,7 +42,7 @@ export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) =>
     });
 
     await batch.commit()
-    console.log('DONE')
+    console.log('DONE BATCH WRITE TO DB')
 }
 
 
