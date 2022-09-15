@@ -3,6 +3,7 @@ import './sign-up-form.styles.scss'
 import { createUserAuthWithEmaiAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.util'
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
     displayName: '',
@@ -15,6 +16,7 @@ const SignUpForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (event) => {
@@ -28,10 +30,17 @@ const SignUpForm = () => {
             const { user } = await createUserAuthWithEmaiAndPassword(email, password);
             await createUserDocumentFromAuth(user, { displayName });
             resetFormFields();
+            navigate('/');
 
         }
         catch (e) {
-            console.error(e)
+            switch (e.code) {
+                case 'auth/weak-password':
+                    alert('Password should be at least 6 characters!')
+                    break
+                default:
+                    console.error(e)
+            }
         }
     }
 
