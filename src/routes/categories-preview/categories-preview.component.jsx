@@ -1,17 +1,13 @@
 import './categories-preview.styles.scss';
 import { Fragment, useContext } from 'react';
-import { CategoriesContext } from '../../contexts/categories.context';
-import { useNavigate } from 'react-router-dom';
 import CategoryPreview from '../../components/category-preview/category-preview.component';
+import { selectCategoriesMap } from '../../store/categories/category.selectors';
+import { useSelector } from 'react-redux';
 
 const CategoriesPreview = () => {
-    const { categoriesMap } = useContext(CategoriesContext)
 
-    const navigate = useNavigate()
+    const categoriesMap = useSelector(selectCategoriesMap);
 
-    const navigateToCategoryPages = (title) => {
-        navigate(`/${title}`)
-    }
 
     return (
         <Fragment>
